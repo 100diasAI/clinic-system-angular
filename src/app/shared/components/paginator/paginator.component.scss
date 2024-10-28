@@ -1,0 +1,27 @@
+.mat-paginator-sticky {
+  bottom: 0;
+  position: sticky;
+  z-index: 10;
+}
+
+@media screen and (max-width: 600px) {
+  ::ng-deep .mat-paginator-page-size {
+    margin-right: 8px;
+  }
+
+  ::ng-deep .mat-paginator-range-label {
+    margin: 0 12px 0 8px;
+  }
+
+  ::ng-deep .mat-paginator-container {
+    padding: 0 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  ::ng-deep .mat-paginator-page-size-select {
+    margin: 6px 4px 0 4px;
+    width: 56px;
+  }
+}
+

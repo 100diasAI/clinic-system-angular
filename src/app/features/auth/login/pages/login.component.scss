@@ -1,0 +1,65 @@
+@use "styles/components/form/form-page" as *;
+@use "styles/components/form/form" as *;
+
+
+.sign-up {
+  padding-top: 20px;
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #1a73e8;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#forget-password {
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #1a73e8;
+    font-size: 0.8rem;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.login-card {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .login-card {
+    padding: 10px;
+  }
+
+  mat-card-title {
+    font-size: 1.5rem;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
+}

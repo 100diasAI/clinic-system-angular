@@ -1,0 +1,47 @@
+@use "styles/components/form/form" as *;
+
+.popup-form {
+  width: 100%;
+  max-width: 600px; // Limitar el ancho máximo para pantallas grandes
+  margin: 0 auto; // Centrar el formulario
+}
+
+.whole-page-form {
+  width: 100%;
+  max-width: 1200px; // Limitar el ancho máximo para pantallas grandes
+  margin: 0 auto; // Centrar el formulario
+  padding: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr; // Una columna en pantallas pequeñas
+  }
+
+  mat-form-field {
+    width: 100%; // Campos de formulario a ancho completo en móviles
+  }
+
+  button[mat-raised-button] {
+    width: 100%; // Botón a ancho completo en móviles
+    margin-top: 20px;
+  }
+}
+
+// Ajustes adicionales para mejorar la legibilidad en dispositivos móviles
+@media (max-width: 400px) {
+  mat-card-title {
+    font-size: 1.5rem;
+  }
+
+  mat-label, input, mat-select {
+    font-size: 0.9rem;
+  }
+}

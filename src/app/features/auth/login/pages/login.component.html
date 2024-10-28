@@ -1,0 +1,76 @@
+<div class="form-page">
+  <div class="headlines-wrapper">
+    <h1>Sistema Clínico</h1>
+  </div>
+  <div class="form-card-wrapper">
+    <div class="form-card-child">
+      <mat-card class="login-card">
+        <mat-card-title>Iniciar sesión</mat-card-title>
+        <mat-card-content>
+          <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <p>
+              <mat-form-field>
+                <mat-label>Correo electrónico</mat-label>
+                <input
+                  formControlName="email"
+                  id="email-input"
+                  matInput
+                  placeholder="Correo electrónico"
+                  type="text"
+                />
+              </mat-form-field>
+            </p>
+
+            <p>
+              <mat-form-field>
+                <mat-label>Contraseña</mat-label>
+                <mat-hint align="end" id="forget-password">
+                  <button
+                    (click)="
+                      this.router.navigate([PathConstants.FORGOT_PASSWORD_PATH])
+                    "
+                    type="button"
+                  >
+                    ¿Olvidaste tu contraseña?
+                  </button>
+                </mat-hint>
+                <input
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                  id="password-input"
+                  matInput
+                  placeholder="Contraseña"
+                />
+                <button
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Ocultar contraseña'"
+                  [attr.aria-pressed]="hide"
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                >
+                  <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </p>
+
+            <div class="container">
+              <div class="button-container">
+                <button class="button" id="submit-btn" type="submit">
+                  Iniciar sesión
+                </button>
+              </div>
+            </div>
+            <div class="sign-up">
+              <button
+                (click)="this.router.navigate([PathConstants.REGISTER_PATH])"
+              >
+                ¿No tienes una cuenta? Regístrate
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

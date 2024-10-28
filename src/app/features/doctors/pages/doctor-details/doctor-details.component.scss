@@ -1,0 +1,90 @@
+h3 {
+  font-size: 2em;
+}
+
+.doctors {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  width: 100%;
+  overflow: hidden;
+
+  .doctor {
+    padding: 2em;
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        'doctor-image name'
+        'doctor-image tab-group-wrapper'
+        'schedule-appointment schedule-appointment';
+    gap: 2em;
+    background-color: #f5f5f5;
+
+    @media (min-width: 768px) {
+      grid-template-areas:
+        'doctor-image name . .'
+        'doctor-image tab-group-wrapper  . schedule-appointment'
+        'doctor-image tab-group-wrapper . schedule-appointment';
+    }
+
+    .tab-group-wrapper {
+      grid-area: tab-group-wrapper;
+      width: 100%;
+    }
+
+    p {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.6em;
+      flex-direction: column;
+
+      .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.4em
+      }
+    }
+
+    .doctor-image {
+      grid-area: doctor-image;
+      min-width: 30vh;
+
+      img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+      }
+    }
+
+    .tab-group {
+      grid-area: tab-group;
+      width: 100%;
+      max-width: 700px;
+      height: fit-content;
+    }
+
+    .name {
+      grid-area: name;
+    }
+
+    .schedule-appointment {
+      grid-area: schedule-appointment;
+      min-width: max-content;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .doctors .doctor {
+    padding: 1em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+}

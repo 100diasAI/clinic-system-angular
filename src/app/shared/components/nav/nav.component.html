@@ -1,0 +1,72 @@
+<mat-toolbar color="primary">
+  <div>
+    <button
+      (click)="drawer.toggle()"
+      aria-label="Botón de icono de ejemplo con icono de menú"
+      class="example-icon"
+      mat-icon-button
+    >
+      <mat-icon style="color: #fff">menu</mat-icon>
+    </button>
+    <a [routerLink]="PathConstants.HOME_PATH">Sistema Clínico</a>
+  </div>
+
+  @if (authService.authData | async; as authData) {
+    <div>
+      <div class="name-container">
+        Hola, {{ authData.name }} {{ authData.surname }}
+      </div>
+      <button (click)="logout()" mat-raised-button color="secondary">
+        Cerrar sesión
+      </button>
+    </div>
+  } @else {
+    <div>
+      <div class="name-container">Hola, Invitado</div>
+      <button
+        [routerLink]="PathConstants.LOGIN_PATH"
+        mat-raised-button
+        color="secondary"
+      >
+        Iniciar sesión
+      </button>
+    </div>
+  }
+</mat-toolbar>
+
+<mat-drawer-container autosize class="container">
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-nav-list>
+      @for (navItem of navItems; track navItem) {
+        <app-nav-item
+          [allowedRoles]="navItem.allowedRoles"
+          [listItemPath]="navItem.listItemPath"
+          [listItemText]="navItem.listItemText"
+          [requireLogin]="navItem.requireLogin"
+        ></app-nav-item>
+      }
+      @if (authService.checkAccess([UserRole.ADMIN])) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Administración
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+            @for (adminItem of adminNavItems; track adminItem) {
+              <app-nav-item
+                [listItemPath]="adminItem.listItemPath"
+                [listItemText]="adminItem.listItemText"
+                [requireLogin]="true"
+                [allowedRoles]="[UserRole.ADMIN]"
+              ></app-nav-item>
+            }
+          </mat-nav-list>
+        </mat-expansion-panel>
+      }
+    </mat-nav-list>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <ng-content></ng-content>
+  </div>
+</mat-drawer-container>

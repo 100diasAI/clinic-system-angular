@@ -1,0 +1,59 @@
+@use "styles/abstracts/colors" as *;
+
+.features-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2em;
+  padding: 2em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 200;
+  padding-top: 1em;
+  word-spacing: 5px;
+  text-align: left;
+  line-height: normal;
+  min-height: 2.5em;
+}
+
+.feature {
+  p {
+    width: 100%;
+    padding-top: 1em;
+  }
+}
+
+.border {
+  content: "";
+  display: flex;
+  margin: 0 auto;
+  width: 50%;
+  padding-top: 15px;
+  border-bottom: 1px solid $primary;
+  translate: -50%;
+}
+
+.mat-icon {
+  color: $primary;
+  font-size: 1.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .features-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    min-height: auto;
+  }
+
+  .mat-icon {
+    font-size: 1.2rem;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+}

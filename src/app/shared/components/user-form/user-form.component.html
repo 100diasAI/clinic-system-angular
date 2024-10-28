@@ -1,0 +1,294 @@
+<div class="form-card-wrapper">
+  <div [ngClass]="class">
+    <mat-card class="login-card">
+      <mat-card-title>{{ action }}</mat-card-title>
+      <mat-card-content>
+        <form
+          #myForm="ngForm"
+          (ngSubmit)="onSubmit()"
+          [formGroup]="registrationForm"
+          id="userForm"
+        >
+          <div class="form-grid">
+            <!-- Basic Data -->
+            <div formGroupName="basicData">
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="name" id="name-input" matInput />
+
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.name.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('basicData', 'name') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input formControlName="surname" id="surname-input" matInput />
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.surname.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('basicData', 'surname') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input formControlName="email" id="email-input" matInput />
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.email.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('basicData', 'email') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input
+                  formControlName="phoneNumber"
+                  id="phoneNumber-input"
+                  matInput
+                />
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.phoneNumber.invalid &&
+                    submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('basicData', 'phoneNumber') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>PESEL</mat-label>
+                <input formControlName="pesel" id="pesel-input" matInput />
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.pesel.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('basicData', 'pesel') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input
+                  formControlName="password"
+                  id="password-input"
+                  matInput
+                  type="password"
+                />
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.password.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getPasswordErrorMessage() }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Confirmar contraseña</mat-label>
+                <input
+                  formControlName="confirmPassword"
+                  id="confirmPassword-input"
+                  matInput
+                  type="password"
+                />
+                <mat-error>
+                  @if (
+                    formControl.basicData.controls.confirmPassword.invalid &&
+                    submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('basicData', 'confirmPassword') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Address -->
+            <div formGroupName="address">
+              <mat-form-field appearance="outline">
+                <mat-label>País</mat-label>
+                <input formControlName="country" id="country-input" matInput />
+                <mat-error>
+                  @if (
+                    formControl.address.controls.country.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('address', 'country') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <input formControlName="city" id="city-input" matInput />
+                <mat-error>
+                  @if (formControl.address.controls.city.invalid && submitted) {
+                    <span>
+                      {{ getErrorMessage('address', 'city') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Calle</mat-label>
+                <input formControlName="street" id="street-input" matInput />
+                <mat-error>
+                  @if (
+                    formControl.address.controls.street.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('address', 'street') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Código Postal</mat-label>
+                <input
+                  formControlName="postalCode"
+                  id="postalCode-input"
+                  matInput
+                />
+                <mat-error>
+                  @if (
+                    formControl.address.controls.postalCode.invalid && submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('address', 'postalCode') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Número de Casa</mat-label>
+                <input
+                  formControlName="houseNumber"
+                  id="houseNumber-input"
+                  matInput
+                />
+                <mat-error>
+                  @if (
+                    formControl.address.controls.houseNumber.invalid &&
+                    submitted
+                  ) {
+                    <span>
+                      {{ getErrorMessage('address', 'houseNumber') }}
+                    </span>
+                  }
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Número de Apartamento</mat-label>
+                <input
+                  formControlName="apartmentNumber"
+                  id="apartmentNumber-input"
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+
+            @if (!router.url.includes(PathConstants.REGISTER_PATH)) {
+              <div>
+                <!-- Admin Managed Data -->
+                <ng-container formGroupName="adminManagedData">
+                  <mat-checkbox id="enabled-checkbox" formControlName="enabled">Habilitado</mat-checkbox>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Rol</mat-label>
+                    <mat-select id="role-select" formControlName="role">
+                      <mat-option [value]="UserRole.PATIENT"
+                        >{{ UserRole.PATIENT }}
+                      </mat-option>
+                      <mat-option [value]="UserRole.DOCTOR"
+                        >{{ UserRole.DOCTOR }}
+                      </mat-option>
+                      <mat-option [value]="UserRole.ADMIN"
+                        >{{ UserRole.ADMIN }}
+                      </mat-option>
+                      <mat-option [value]="UserRole.REGISTRAR"
+                        >{{ UserRole.REGISTRAR }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
+                <!-- Doctor Managed Data -->
+                @if (
+                  formControl.adminManagedData.controls.role.value ===
+                  UserRole.DOCTOR
+                ) {
+                  <ng-container formGroupName="doctorDetails">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Especialización</mat-label>
+                      <input
+                        id="specialization-input"
+                        formControlName="specialization"
+                        matInput
+                      />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Educación</mat-label>
+                      <input
+                        id="education-input"
+                        formControlName="education"
+                        matInput
+                      />
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Descripción</mat-label>
+                      <input
+                        id="description-input"
+                        formControlName="description"
+                        matInput
+                      />
+                    </mat-form-field>
+                  </ng-container>
+                }
+              </div>
+            }
+          </div>
+
+          @switch (formType) {
+            @case (FormType.WholePageForm) {
+              <button mat-raised-button type="submit">Enviar</button>
+            }
+            @case (FormType.PopupForm) {
+              <ng-content></ng-content>
+            }
+            @default {
+              <button mat-raised-button type="submit">Enviar</button>
+            }
+          }
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

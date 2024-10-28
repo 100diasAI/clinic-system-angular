@@ -1,0 +1,77 @@
+<section>
+  <h2>Gestionar Especialidades Médicas</h2>
+  <div class="actions-section">
+    <button
+      (click)="openAddSpecialtyDialog()"
+      color="primary"
+      id="add-specialty-button"
+      mat-button
+      mat-raised-button
+    >
+      <mat-icon>add</mat-icon>
+      Añadir especialidad
+    </button>
+  </div>
+
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      @if (dataSource.data.length > 0) {
+        <table [dataSource]="dataSource" mat-table>
+          @for (
+            column of tableHelper.baseColumnNames;
+            track column;
+            let i = $index
+          ) {
+            <ng-container [matColumnDef]="column">
+              <th *matHeaderCellDef mat-header-cell>
+                {{ tableHelper.baseColumnTitles[i] }}
+              </th>
+              <td *matCellDef="let element" mat-cell>
+                {{ tableHelper.nestedPropertyAccessor(element, column) }}
+              </td>
+            </ng-container>
+          }
+          <ng-container matColumnDef="edit">
+            <th *matHeaderCellDef mat-header-cell>Editar</th>
+            <td *matCellDef="let cell" mat-cell>
+              <button
+                (click)="openEditSpecialtyDialog(cell)"
+                aria-label="Botón con icono de editar"
+                color="primary"
+                mat-icon-button
+                class="edit-specialty-button"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th *matHeaderCellDef mat-header-cell>Eliminar</th>
+            <td *matCellDef="let cell" mat-cell>
+              <button
+                (click)="deleteSpecialty(cell)"
+                aria-label="Botón con icono de eliminar"
+                color="warn"
+                mat-icon-button
+                class="delete-specialty-button"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+          <tr
+            *matRowDef="let row; columns: tableHelper.allColumnNames"
+            mat-row
+          ></tr>
+        </table>
+      }
+    </div>
+  </div>
+  <app-paginator
+    (load)="getPagedSpecialties($event)"
+    [data]="pageSpecialtyResponseData"
+    [requestParams]="requestParams"
+  >
+  </app-paginator>
+</section>

@@ -1,0 +1,14 @@
+@if (data) {
+  <mat-paginator
+    (page)="onPageChange($event)"
+    [length]="data.totalElements"
+    [pageIndex]="data.number"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageSize]="data.size"
+    aria-label="Seleccionar página"
+    class="mat-paginator-sticky"
+    color="primary"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+}

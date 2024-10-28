@@ -1,0 +1,68 @@
+<section>
+  <h2>Conoce a nuestros doctores</h2>
+  @if (doctors$ | async; as doctors) {
+    <div class="doctors">
+      <app-paginator
+        (load)="getPagedDoctors($event)"
+        [data]="doctors"
+        [requestParams]="userRequestParams"
+      >
+      </app-paginator>
+      @for (doctor of doctors.content; track doctor) {
+        <div class="doctor">
+          <div class="doctor-image">
+            <img alt="doctor.name" src="assets/images/female-doctor.webp" />
+          </div>
+          <div class="doctor-info">
+            <h3>
+              <a [routerLink]="doctor.email"
+                >{{ doctor.name }} {{ doctor.surname }}</a
+              >
+            </h3>
+            @if (doctor.doctorDetails?.specialization) {
+              <p>
+                <span class="material-symbols-outlined">
+                  stethoscope_check
+                </span>
+                {{ doctor.doctorDetails?.specialization }}
+              </p>
+            }
+            <p>
+              <mat-icon>place</mat-icon>
+              Wijttenbachstraat 36, 1093 JC Amsterdam
+            </p>
+            @if (doctor.doctorDetails?.education) {
+              <p>
+                <mat-icon>school</mat-icon>
+                {{ doctor.doctorDetails?.education }}
+              </p>
+            }
+            @if (doctor.doctorDetails?.description) {
+              <p class="description">
+                {{ doctor.doctorDetails?.description }}
+              </p>
+            }
+          </div>
+          <div class="schedule-appointment">
+            <a [routerLink]="doctor.email" mat-raised-button
+              >Programar Cita</a
+            >
+            @if (authService.checkAccess([UserRole.REGISTRAR])) {
+              <a
+                [routerLink]="'/manage-appointments/' + doctor.id"
+                mat-raised-button
+                >Gestionar citas</a
+              >
+            }
+          </div>
+        </div>
+      }
+      <app-paginator
+        (load)="getPagedDoctors($event)"
+        [data]="doctors"
+        [requestParams]="userRequestParams"
+      >
+      </app-paginator>
+    </div>
+  }
+</section>

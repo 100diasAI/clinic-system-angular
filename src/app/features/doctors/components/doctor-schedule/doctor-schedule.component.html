@@ -1,0 +1,21 @@
+@if (scheduleDataSource) {
+  <div class="table-container">
+    <table
+      [dataSource]="scheduleDataSource"
+      class="mat-elevation-z8 schedule"
+      mat-table
+    >
+      @for (column of tableHelper.allColumnNames; track column) {
+        <ng-container matColumnDef="{{ column }}">
+          <th *matHeaderCellDef mat-header-cell>{{ column }}</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.get(column)?.startTime }} -
+            {{ element.get(column)?.endTime }}
+          </td>
+        </ng-container>
+      }
+      <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: tableHelper.allColumnNames" mat-row></tr>
+    </table>
+  </div>
+}

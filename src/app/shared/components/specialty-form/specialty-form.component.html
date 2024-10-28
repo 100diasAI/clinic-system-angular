@@ -1,0 +1,13 @@
+<form [formGroup]="specialtyForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" required></textarea>
+  </mat-form-field>
+
+  <ng-content></ng-content>
+</form>

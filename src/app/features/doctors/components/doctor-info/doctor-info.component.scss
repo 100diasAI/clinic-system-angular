@@ -1,0 +1,55 @@
+p {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6em;
+  flex-direction: column;
+  margin-bottom: 1em;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4em;
+  }
+}
+
+.description {
+  padding-top: 1em;
+  grid-area: description;
+}
+
+.doctor-info {
+  padding-top: 1em;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "basic-info"
+    "contact-info"
+    "description";
+  gap: 1em;
+}
+
+.contact-info {
+  grid-area: contact-info;
+}
+
+.basic-info {
+  grid-area: basic-info;
+}
+
+@media (min-width: 768px) {
+  .doctor-info {
+    grid-template-areas:
+      "basic-info contact-info"
+      "description description";
+  }
+}
+
+@media (min-width: 1024px) {
+  .doctor-info {
+    grid-template-areas:
+      "basic-info basic-info contact-info contact-info"
+      "description description description description";
+  }
+}

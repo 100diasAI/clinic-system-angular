@@ -1,0 +1,6 @@
+@use '@angular/material' as mat;
+@use 'm3-theme' as *;
+
+@include mat.core();
+
+$my-theme: $light-theme;

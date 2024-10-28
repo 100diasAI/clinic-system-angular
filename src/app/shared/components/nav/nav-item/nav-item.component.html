@@ -1,0 +1,10 @@
+@if (checkAccess()) {
+  <a
+    [routerLinkActiveOptions]="{ exact: true }"
+    [routerLink]="listItemPath"
+    mat-list-item
+    routerLinkActive="active"
+    >
+    {{ listItemText }}
+  </a>
+}

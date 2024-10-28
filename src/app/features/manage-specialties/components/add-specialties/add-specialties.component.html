@@ -1,0 +1,12 @@
+<mat-dialog-content id="addSpecialtyPopup">
+  <app-specialty-form
+    [action]="'Create Specialty'"
+    [dialogRef]="dialogRef"
+    [formType]="FormType.PopupForm"
+  >
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancelar</button>
+      <button id="submit-button" mat-button type="submit">Guardar</button>
+    </mat-dialog-actions>
+  </app-specialty-form>
+</mat-dialog-content>

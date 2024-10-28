@@ -1,0 +1,54 @@
+.appointment-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 1em;
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  .appointment-card {
+    padding: 1.5em;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+  }
+
+  .appointments {
+    display: grid;
+    gap: 0.5em;
+    max-height: 30vh;
+    overflow-y: auto;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+    .appointment {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .appointment-wrapper {
+    padding: 0 1em;
+  }
+
+  .calendar-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  mat-calendar {
+    width: 100%;
+  }
+}

@@ -1,0 +1,72 @@
+<div class="form-card-wrapper">
+  <div
+    [ngClass]="
+      formType === FormType.PopupForm ? 'popup-form' : 'whole-page-form'
+    "
+  >
+    <mat-card
+      [ngClass]="formType === FormType.PopupForm ? 'no-border-card' : ''"
+      class="login-card"
+    >
+      <mat-card-title>{{ action }}</mat-card-title>
+      <mat-card-content>
+        <form #form (ngSubmit)="onSubmit()" [formGroup]="appointmentForm">
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="status">
+                <mat-option [value]="AppointmentStatus.BOOKED"
+                  >{{ AppointmentStatus.BOOKED }}
+                </mat-option>
+                <mat-option [value]="AppointmentStatus.CANCELLED"
+                  >{{ AppointmentStatus.CANCELLED }}
+                </mat-option>
+                <mat-option [value]="AppointmentStatus.FINISHED"
+                  >{{ AppointmentStatus.FINISHED }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Descripción</mat-label>
+              <textarea formControlName="description" matInput></textarea>
+            </mat-form-field>
+            <div formArrayName="medicines">
+              @for (
+                medicine of getMedicines().controls;
+                track medicine;
+                let i = $index
+              ) {
+                <div [formGroupName]="i">
+                  <div>Medicamento {{ i + 1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="name" matInput />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Cantidad</mat-label>
+                    <input formControlName="quantity" matInput />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de días</mat-label>
+                    <input formControlName="numberOfDays" matInput />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Dosis</mat-label>
+                    <input formControlName="dosage" matInput />
+                  </mat-form-field>
+                </div>
+              }
+            </div>
+          </div>
+          @if (formType === FormType.WholePageForm) {
+            <button mat-raised-button type="submit">Enviar</button>
+          }
+          <button (click)="addMedicine()" mat-raised-button type="button">
+            <mat-icon>add</mat-icon>
+            Añadir medicamento
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

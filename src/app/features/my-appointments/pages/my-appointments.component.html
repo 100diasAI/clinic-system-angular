@@ -1,0 +1,49 @@
+<section>
+  <h2>Mis citas</h2>
+  @if (pageAppointmentResponseData?.content) {
+    <div class="table-wrapper">
+      <div class="mat-elevation-z8">
+        <table [dataSource]="dataSource" mat-table>
+          @for (column of tableHelper.baseColumnNames; track column; let i = $index) {
+            <ng-container [matColumnDef]="column">
+              <th *matHeaderCellDef mat-header-cell>
+                {{ tableHelper.baseColumnTitles[i] }}
+              </th>
+              <td *matCellDef="let element" mat-cell>
+                {{ tableHelper.nestedPropertyAccessor(element, column) | date }}
+              </td>
+            </ng-container>
+          }
+          <ng-container matColumnDef="cancel">
+            <th *matHeaderCellDef mat-header-cell>Cancelar</th>
+            <td *matCellDef="let cell" mat-cell>
+              <button
+                (click)="cancelAppointment(cell)"
+                aria-label="Botón con icono de cancelar"
+                color="primary"
+                mat-icon-button
+              >
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+          <tr
+            *matRowDef="let row; columns: tableHelper.allColumnNames"
+            mat-row
+          ></tr>
+        </table>
+      </div>
+    </div>
+  } @else {
+    <div class="no-data">
+      <p>No se encontraron citas</p>
+    </div>
+  }
+  <app-paginator
+    (load)="getPagedAppointments($event)"
+    [data]="pageAppointmentResponseData"
+    [requestParams]="requestParams"
+  >
+  </app-paginator>
+</section>

@@ -1,0 +1,80 @@
+h3 {
+  font-size: 1.5rem;
+}
+
+app-paginator {
+  width: 100%;
+  max-width: 70%;
+}
+
+.doctors {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+
+  .doctor {
+    padding: 2em;
+    width: 100%;
+    max-width: 80%;
+    display: grid;
+    grid-template-areas: 
+      'doctor-image'
+      'doctor-info'
+      'schedule-appointment';
+    gap: 2em;
+    background-color: #f5f5f5;
+
+    @media (min-width: 768px) {
+      grid-template-areas: 'doctor-image doctor-info doctor-info doctor-info schedule-appointment';
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+    }
+
+    .description {
+      padding-top: 3em;
+    }
+
+    .doctor-image {
+      grid-area: doctor-image;
+      width: 100%;
+      max-width: 20vh;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .doctor-info {
+      grid-area: doctor-info;
+    }
+
+    .schedule-appointment {
+      grid-area: schedule-appointment;
+      align-self: center;
+      display: flex;
+      gap: 1em;
+      flex-direction: column;
+      width: 100%;
+
+      @media (min-width: 768px) {
+        width: fit-content;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .doctors .doctor {
+    padding: 1em;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,136 @@
+@use "styles/abstracts" as *;
+
+.mat-toolbar {
+  background-color: $primary !important;
+  color: $my-white !important;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.sidenav {
+  justify-content: center;
+  border-radius: 0;
+  border-right: 0.5px solid rgba(97, 96, 96, 0.5);
+  width: 100%;
+  max-width: 250px;
+
+  @include mq(medium) {
+    width: 250px;
+  }
+}
+
+mat-nav-list {
+  width: 100%;
+  justify-content: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 1rem;
+
+    @include mq(medium) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  padding: 0 1rem;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: none;
+
+      @include mq(small) {
+        display: block;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .name-container {
+    display: none;
+    @include mq(very-small) {
+      display: flex;
+      margin-right: 10px;
+    }
+  }
+}
+
+.active {
+  color: $primary;
+  background-color: rgba(103, 58, 183, 0.15) !important;
+}
+
+mat-drawer {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  z-index: 100;
+  height: calc(100vh - 64px);
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+  padding: 0;
+}
+
+mat-accordion {
+  a {
+    span {
+      margin-left: 20px;
+    }
+  }
+}
+
+mat-expansion-panel {
+  background: transparent;
+  box-shadow: none;
+
+  mat-panel-title {
+    font-weight: bold;
+  }
+
+  mat-nav-list {
+    padding: 0;
+
+    a {
+      padding-left: 20px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  mat-toolbar {
+    flex-wrap: wrap;
+    
+    div:last-child {
+      width: 100%;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .name-container {
+    font-size: 0.8rem;
+  }
+
+  button[mat-raised-button] {
+    font-size: 0.8rem;
+    padding: 0 8px;
+  }
+}

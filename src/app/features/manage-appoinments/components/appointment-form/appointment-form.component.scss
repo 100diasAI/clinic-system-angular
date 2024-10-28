@@ -1,0 +1,38 @@
+@use "styles/components/form/form" as *;
+
+.popup-form {
+  width: 100%;
+}
+
+.whole-page-form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.no-border-card {
+  border: none;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    padding: 10px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

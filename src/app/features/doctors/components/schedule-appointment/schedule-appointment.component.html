@@ -1,0 +1,52 @@
+<div *ngIf="authService.authDataValue" class="appointment-wrapper">
+  <mat-card class="appointment-card">
+    <h3>Programar una cita</h3>
+    <form (ngSubmit)="onSubmit()" class="form">
+      <div class="calendar-wrapper">
+        <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Examen</mat-label>
+        <mat-select
+          [(ngModel)]="selectedExaminationId"
+          name="examinationId"
+          required
+        >
+          <mat-option
+            *ngFor="let examination of doctorExaminations"
+            [value]="examination.id"
+          >
+            {{ examination.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button color="primary" mat-raised-button type="submit">Buscar</button>
+    </form>
+  </mat-card>
+
+  <div
+    *ngIf="availableAppointmentDates && availableAppointmentDates.length > 0"
+  >
+    <h3>Citas disponibles</h3>
+    <div class="appointments">
+      <div
+        *ngFor="let appointment of availableAppointmentDates"
+        class="appointment"
+      >
+        <button
+          (click)="scheduleAppointment(appointment.date)"
+          mat-stroked-button
+        >
+          {{ appointment.date | date: 'HH:mm' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #login>
+  <mat-card class="login-card">
+    <p>Necesitas iniciar sesión para programar una cita</p>
+  </mat-card>
+</ng-template>
