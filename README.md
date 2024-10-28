@@ -1,26 +1,5 @@
 # Clinic System Angular
 
-This project is a frontend for an application designed to manage a small medical
-clinic. It is built using Angular and Angular Material. The project can be run
-locally or deployed to a Kubernetes cluster. The system can be used as a
-frontend for the following backend project:
-[Clinic System](https://github.com/marekkawalski/clinic-system).
-
-## Table of Contents
-
-<!-- TOC -->
-
-- [Clinic System Angular](#clinic-system-angular)
-  - [Table of Contents](#table-of-contents)
-  - [Running project locally](#running-project-locally)
-    - [Prerequisites](#prerequisites)
-    - [Setup](#setup)
-    - [Running the Project](#running-the-project)
-  - [Deployment to Kubernetes](#deployment-to-kubernetes) _
-  [Prerequisites](#prerequisites-1) _ [Setup](#setup-1) \*
-  [Running the Project](#running-the-project-1)
-  <!-- TOC -->
-
 Clone the repository and navigate to the project directory
 
 ```bash
