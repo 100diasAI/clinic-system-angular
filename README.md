@@ -3,7 +3,7 @@
 Clone the repository and navigate to the project directory
 
 ```bash
-git clone https://github.com/marekkawalski/clinic-system-angular.git &&
+git clone https://github.com/100diasAI/clinic-system-angular.git &&
 cd clinic-system-angular
 ```
 
