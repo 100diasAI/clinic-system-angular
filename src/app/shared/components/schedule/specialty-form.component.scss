@@ -1,0 +1,69 @@
+.popup-form, .whole-page-form {
+    width: 100%;
+    margin: 0 auto;
+    
+    mat-card {
+      padding: 20px;
+      
+      @media (max-width: 600px) {
+        padding: 16px;
+      }
+    }
+  }
+  
+  .popup-form {
+    max-width: 600px;
+  }
+  
+  .whole-page-form {
+    max-width: 1200px;
+    padding: 20px;
+  }
+  
+  .form-grid {
+    display: grid;
+    gap: 20px;
+    margin-top: 20px;
+    
+    mat-form-field {
+      width: 100%;
+    }
+    
+    textarea {
+      min-height: 100px;
+    }
+  }
+  
+  mat-card-title {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
+    }
+  }
+  
+  mat-card-actions {
+    padding: 16px !important;
+    margin: 0;
+    
+    button {
+      margin-left: 8px;
+      
+      @media (max-width: 600px) {
+        width: 100%;
+        margin: 8px 0;
+      }
+    }
+  }
+  
+  @media (max-width: 600px) {
+    mat-card-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .form-grid {
+      gap: 16px;
+    }
+  }

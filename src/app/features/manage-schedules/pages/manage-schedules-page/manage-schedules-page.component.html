@@ -1,0 +1,39 @@
+<section class="schedule-page">
+  <h2>Gestionar Horarios Médicos</h2>
+  
+  <div class="schedule-controls">
+    <mat-form-field class="doctor-selector">
+      <mat-label>Seleccionar Doctor</mat-label>
+      <mat-select (selectionChange)="onDoctorSelected($event.value)">
+        @for (doctor of doctors; track doctor.id) {
+          <mat-option [value]="doctor.id">
+            {{doctor.name}} {{doctor.surname}}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button 
+      mat-raised-button 
+      color="primary" 
+      [disabled]="!selectedDoctorId"
+      (click)="openAddScheduleDialog()">
+      <mat-icon>add</mat-icon>
+      Agregar Horario
+    </button>
+  </div>
+
+  <div class="calendar-container">
+    @if (selectedDoctorId) {
+      <app-schedule-calendar 
+        [doctorId]="selectedDoctorId">
+      </app-schedule-calendar>
+    } @else {
+      <mat-card class="no-selection-message">
+        <mat-card-content>
+          Por favor, seleccione un doctor para ver su calendario
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</section> 

@@ -7,6 +7,7 @@ import { SnackbarService } from '@app/shared/services/snackbar.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { Specialty } from '@app/core/models/Specialty';
 
 @Component({
   selector: 'app-specialty-form',
@@ -82,15 +83,21 @@ export class SpecialtyFormComponent implements OnInit {
     );
   }
 
-  updateSpecialty(specialtyData: any) {
-    this.specialtyService.updateSpecialty(specialtyData, this.specialtyId!).subscribe(
-      () => {
-        this.snackBarService.openSuccessSnackBar({ message: 'Specialty updated successfully' });
-        this.dialogRef.close(true);
-      },
-      error => {
-        this.snackBarService.openFailureSnackBar({ message: 'Error updating specialty' });
-      }
-    );
+  updateSpecialty(specialtyData: Omit<Specialty, 'id' | 'createdAt' | 'updatedAt'>) {
+    if (this.specialtyId) {
+      this.specialtyService.updateSpecialty(this.specialtyId, specialtyData).subscribe({
+        next: (response) => {
+          this.snackBarService.openSuccessSnackBar({
+            message: 'Especialidad actualizada con éxito',
+          });
+          this.dialogRef?.close(true);
+        },
+        error: (error) => {
+          this.snackBarService.openFailureSnackBar({
+            message: 'Error al actualizar la especialidad',
+          });
+        }
+      });
+    }
   }
 }

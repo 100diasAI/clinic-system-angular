@@ -1,4 +1,4 @@
 export enum FormType {
-  PopupForm = 'popup',
-  WholePageForm = 'whole-page',
+  PopupForm = 'PopupForm',
+  WholePageForm = 'WholePageForm'
 }

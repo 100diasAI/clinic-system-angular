@@ -1,0 +1,69 @@
+<div class="dialog-container" mat-dialog-content>
+  <h2 mat-dialog-title>Editar Doctor</h2>
+  
+  <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="doctor-form">
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="formErrors['name']">
+          {{formErrors['name']}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="surname">
+        <mat-error *ngIf="formErrors['surname']">
+          {{formErrors['surname']}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email">
+        <mat-error *ngIf="formErrors['email']">
+          {{formErrors['email']}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phoneNumber">
+        <mat-error *ngIf="formErrors['phoneNumber']">
+          {{formErrors['phoneNumber']}}
+        </mat-error>
+      </mat-form-field>
+
+      <div formGroupName="doctorDetails">
+        <mat-form-field appearance="outline">
+          <mat-label>Especialización</mat-label>
+          <input matInput formControlName="specialization">
+          <mat-error *ngIf="doctorForm.get('doctorDetails.specialization')?.errors">
+            La especialización es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Educación</mat-label>
+          <input matInput formControlName="education">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="loading">
+        Cancelar
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading || !doctorForm.valid">
+        <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+        <span *ngIf="!loading">Guardar</span>
+      </button>
+    </div>
+  </form>
+</div>

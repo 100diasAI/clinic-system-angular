@@ -1,0 +1,53 @@
+<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" class="schedule-form">
+  <mat-form-field>
+    <mat-label>Tipo de Horario</mat-label>
+    <mat-select formControlName="scheduleType">
+      @for (type of scheduleTypes; track type) {
+        <mat-option [value]="type">{{type}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (scheduleForm.get('scheduleType')?.value === 'WEEKLY') {
+    <mat-form-field>
+      <mat-label>Día de la Semana</mat-label>
+      <mat-select formControlName="dayOfWeek">
+        @for (day of daysOfWeek; track day.value) {
+          <mat-option [value]="day.value">{{day.name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  @if (scheduleForm.get('scheduleType')?.value === 'DAILY') {
+    <mat-form-field>
+      <mat-label>Fecha Específica</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="specificDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  }
+
+  @if (scheduleForm.get('scheduleType')?.value === 'MONTHLY') {
+    <mat-form-field>
+      <mat-label>Día del Mes</mat-label>
+      <input matInput type="number" formControlName="dayOfMonth" min="1" max="31">
+    </mat-form-field>
+  }
+
+  <div class="time-inputs">
+    <mat-form-field>
+      <mat-label>Hora Inicio</mat-label>
+      <input matInput type="time" formControlName="startTime">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Hora Fin</mat-label>
+      <input matInput type="time" formControlName="endTime">
+    </mat-form-field>
+  </div>
+
+  <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
+
+  <ng-content></ng-content>
+</form> 

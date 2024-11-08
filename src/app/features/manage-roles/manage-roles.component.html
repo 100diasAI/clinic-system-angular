@@ -1,0 +1,56 @@
+<section class="roles-section">
+    <h2>Gestión de Roles</h2>
+    
+    <div class="table-container mat-elevation-z8">
+      @if (dataSource) {
+        <table [dataSource]="dataSource" mat-table>
+          @for (column of tableHelper.baseColumnNames; track column) {
+            <ng-container [matColumnDef]="column">
+              <th *matHeaderCellDef mat-header-cell>
+                {{ tableHelper.baseColumnTitles[column] }}
+              </th>
+              <td *matCellDef="let element" mat-cell>
+                @if (column === 'isEnabled') {
+                  <mat-icon [class.enabled]="element[column]">
+                    {{ element[column] ? 'check_circle' : 'cancel' }}
+                  </mat-icon>
+                } @else {
+                  {{ tableHelper.nestedPropertyAccessor(element, column) }}
+                }
+              </td>
+            </ng-container>
+          }
+          <ng-container matColumnDef="actions">
+            <th *matHeaderCellDef mat-header-cell>Acciones</th>
+            <td *matCellDef="let element" mat-cell class="actions-cell">
+              <button
+                (click)="openEditUserDialog(element)"
+                mat-icon-button
+                color="primary"
+                class="action-button"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                (click)="toggleUserStatus(element)"
+                mat-icon-button
+                [color]="element.isEnabled ? 'warn' : 'primary'"
+                class="action-button"
+              >
+                <mat-icon>{{ element.isEnabled ? 'block' : 'check_circle' }}</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr *matHeaderRowDef="tableHelper.allColumnNames" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: tableHelper.allColumnNames" mat-row></tr>
+        </table>
+      }
+  
+      <app-paginator
+        (load)="getPagedUsers($event)"
+        [data]="pageUserResponseData"
+        [requestParams]="requestParams"
+      >
+      </app-paginator>
+    </div>
+  </section>

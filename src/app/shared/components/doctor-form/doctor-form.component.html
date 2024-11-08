@@ -1,13 +1,60 @@
-<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" required>
-  </mat-form-field>
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="doctor-form">
+  <div class="form-grid">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="doctorForm.get('name')?.errors?.['required']">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description" required></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="surname">
+      <mat-error *ngIf="doctorForm.get('surname')?.errors?.['required']">
+        El apellido es requerido
+      </mat-error>
+    </mat-form-field>
 
-  <ng-content></ng-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email">
+      <mat-error *ngIf="doctorForm.get('email')?.errors?.['required']">
+        El email es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="phoneNumber">
+      <mat-error *ngIf="doctorForm.get('phoneNumber')?.errors?.['required']">
+        El teléfono es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>CI</mat-label>
+      <input matInput formControlName="pesel">
+      <mat-error *ngIf="doctorForm.get('pesel')?.errors?.['required']">
+        El CI es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <div formGroupName="address">
+      <!-- Campos de dirección -->
+    </div>
+
+    <div formGroupName="doctorDetails">
+      <!-- Campos de detalles -->
+    </div>
+
+    <div class="actions">
+      <button mat-button type="button" (click)="dialogRef?.close()" [disabled]="loading">
+        Cancelar
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading || !doctorForm.valid">
+        {{ doctorId ? 'Actualizar' : 'Crear' }}
+      </button>
+    </div>
+  </div>
 </form>

@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-manage-doctors-page',
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./manage-doctor-page.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatIconModule,
     MatCheckboxModule,

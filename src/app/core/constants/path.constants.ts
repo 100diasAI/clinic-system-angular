@@ -12,4 +12,5 @@ export const PathConstants = {
   MANAGE_DOCTORS_PATH: 'manage-doctors',
   MANAGE_SCHEDULES_PATH: 'manage-schedules',
   MANAGE_PATIENTS_PATH: 'manage-patients',
+  MANAGE_ROLES_PATH: 'manage-roles',
 };

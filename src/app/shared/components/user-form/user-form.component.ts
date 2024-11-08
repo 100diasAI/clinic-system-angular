@@ -51,6 +51,7 @@ export class UserFormComponent implements OnInit {
   @Input() dialogRef?: MatDialogRef<any>;
   @Input() action: string = 'Register';
   @Input() formType?: FormType = FormType.WholePageForm;
+  @Input() forceRole?: UserRole;
   registrationValidationMessages = Registration_Validation_Messages;
 
   registrationForm = this.formBuilder.group(
@@ -157,6 +158,11 @@ export class UserFormComponent implements OnInit {
     this.initFormData();
     this.establishCssClass();
     this.initValidators();
+    if (this.forceRole) {
+      // Si hay un rol forzado, deshabilitar el selector de rol
+      this.formControl.adminManagedData.controls.role.setValue(this.forceRole);
+      this.formControl.adminManagedData.controls.role.disable();
+    }
   }
 
   onSubmit() {
@@ -358,5 +364,13 @@ export class UserFormComponent implements OnInit {
     this.formControl.basicData.controls.confirmPassword.addValidators(
       this.userId ? [] : [Validators.required],
     );
+  }
+
+  private initDoctorDetails(): DoctorDetails {
+    return {
+      specialization: '',
+      education: '',
+      description: ''
+    };
   }
 }

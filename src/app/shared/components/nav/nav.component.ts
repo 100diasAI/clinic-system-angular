@@ -59,12 +59,7 @@ export class NavComponent {
       listItemPath: PathConstants.MY_APPOINTMENTS_PATH,
       requireLogin: true,
     },
-    {
-      listItemText: 'Gestionar Usuarios',
-      listItemPath: PathConstants.MANAGE_USERS_PATH,
-      requireLogin: true,
-      allowedRoles: [UserRole.ADMIN, UserRole.DOCTOR],
-    },
+    
     {
       listItemText: 'Gestionar Citas',
       listItemPath: `manage-appointments/${this.authService.authDataValue?.id}`,
@@ -92,12 +87,18 @@ export class NavComponent {
       requireLogin: true,
       allowedRoles: [UserRole.ADMIN]
     },
-    { 
+    {
+      listItemText: 'Gestionar Usuarios',
+      listItemPath: PathConstants.MANAGE_USERS_PATH,
+      requireLogin: true,
+      allowedRoles: [UserRole.ADMIN, ],
+    },
+    /* { 
       listItemText: 'Gestión de Asegurados', 
       listItemPath: PathConstants.MANAGE_PATIENTS_PATH,
       requireLogin: true,
       allowedRoles: [UserRole.ADMIN]
-    },
+    }, */
   ];
 
   protected readonly PathConstants = PathConstants;

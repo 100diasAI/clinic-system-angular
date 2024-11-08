@@ -11,37 +11,28 @@ import { HttpParamsHelper } from '@app/shared/helpers/httpParamsHelper';
   providedIn: 'root',
 })
 export class SpecialtyService {
-  httpParamsHelper: HttpParamsHelper;
+  private apiUrl = `${environment.apiUrl}/specializations`;
+  private httpParamsHelper = new HttpParamsHelper();
 
-  constructor(private readonly http: HttpClient) {
-    this.httpParamsHelper = new HttpParamsHelper();
+  constructor(private readonly http: HttpClient) {}
+
+  getAllSpecialties(): Observable<Specialty[]> {
+    return this.http.get<Specialty[]>(this.apiUrl);
   }
 
-  getPagedSpecialties(
-    params?: SpecialtyPageRequestParams,
-  ): Observable<PageRequestResponseData<Specialty>> {
-    return this.http.get<PageRequestResponseData<Specialty>>(
-      `${environment.apiUrl}/specialties/paged`,
-      {
-        params: this.httpParamsHelper.setupHttpParams(params),
-      },
-    );
-  }
-
-  getSpecialtyById(specialtyId: string): Observable<Specialty> {
-    return this.http.get<Specialty>(`${environment.apiUrl}/specialties/${specialtyId}`);
+  getSpecialtyById(id: string): Observable<Specialty> {
+    return this.http.get<Specialty>(`${this.apiUrl}/${id}`);
   }
 
   createSpecialty(specialty: Omit<Specialty, 'id' | 'createdAt' | 'updatedAt'>): Observable<Specialty> {
-    return this.http.post<Specialty>(`${environment.apiUrl}/specialties`, specialty);
+    return this.http.post<Specialty>(this.apiUrl, specialty);
   }
 
-  updateSpecialty(specialty: Omit<Specialty, 'createdAt' | 'updatedAt'>, specialtyId: string): Observable<Specialty> {
-    return this.http.put<Specialty>(`${environment.apiUrl}/specialties/${specialtyId}`, specialty);
+  updateSpecialty(id: string, specialty: Omit<Specialty, 'id' | 'createdAt' | 'updatedAt'>): Observable<Specialty> {
+    return this.http.put<Specialty>(`${this.apiUrl}/${id}`, specialty);
   }
 
-  deleteSpecialty(specialtyId: string): Observable<void> {
-    return this.http.delete<void>(`${environment.apiUrl}/specialties/${specialtyId}`);
+  deleteSpecialty(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-  
 }

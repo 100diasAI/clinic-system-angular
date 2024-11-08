@@ -1,5 +1,5 @@
 export enum AppointmentStatus {
-  BOOKED = 'RESERVADO',
-  CANCELLED = 'CANCELADO',
-  FINISHED = 'TERMINADO',
+  BOOKED = 'BOOKED',
+  CANCELLED = 'CANCELLED',
+  FINISHED = 'FINISHED',
 }

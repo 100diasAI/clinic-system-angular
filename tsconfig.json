@@ -9,6 +9,12 @@
       ],
       "@environments/*": [
         "src/environments/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
       ]
     },
     "outDir": "./dist/out-tsc",

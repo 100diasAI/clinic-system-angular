@@ -16,8 +16,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { PageRequestResponseData } from '@app/shared/models/PageRequestResponseData';
 import { Specialty } from '@app/core/models/Specialty';
-import { TableHelper } from '@app/shared/helpers/tableHelper';
-import { SpecialtyPageRequestParams } from '@app/shared/models/SpecialtyPageRequestParams';
+import { SpecialtyTableHelper } from '../../helpers/specialtyTableHelper';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditSpecialtyComponent } from '../../components/edit-specialties/edit-specialties.component';
 import { AddSpecialtyComponent } from '../../components/add-specialties/add-specialties.component';
@@ -59,9 +58,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 export class ManageSpecialtiesPageComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   dataSource: MatTableDataSource<Specialty> = new MatTableDataSource<Specialty>();
-  pageSpecialtyResponseData?: PageRequestResponseData<Specialty>;
-  tableHelper = new TableHelper();
-  requestParams: SpecialtyPageRequestParams = {};
+  tableHelper = new SpecialtyTableHelper();
 
   constructor(
     private readonly specialtyService: SpecialtyService,
@@ -71,46 +68,39 @@ export class ManageSpecialtiesPageComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.getPagedSpecialties(this.requestParams);
+    this.loadSpecialties();
   }
 
   ngAfterViewInit() {
     if (this.paginator) this.dataSource.paginator = this.paginator;
   }
 
-  getPagedSpecialties(params: SpecialtyPageRequestParams) {
+  loadSpecialties() {
     this.spinnerService.show();
-    this.specialtyService
-      .getPagedSpecialties(params)
-      .subscribe((requestResponseData: PageRequestResponseData<Specialty>) => {
-        if (!requestResponseData) {
-          this.snackBarService.openFailureSnackBar({
-            message: 'Failed to load specialty data',
-          });
-          return;
-        }
-        this.dataSource = new MatTableDataSource(requestResponseData.content);
-        this.pageSpecialtyResponseData = requestResponseData;
-        this.tableHelper.setSpecifiedBaseColumnNamesFromRequestData(
-          this.pageSpecialtyResponseData,
-          [
-            'id',
-            'name',
-            'description',
-            'createdAt',
-            'updatedAt',
-          ],
+    this.specialtyService.getAllSpecialties().subscribe({
+      next: (specialties) => {
+        this.dataSource = new MatTableDataSource(specialties);
+        this.tableHelper.setColumnConfiguration(
+          ['id', 'name', 'description', 'active', 'createdAt', 'updatedAt'],
           {
-            id: 'Id',
-            name: 'Name',
-            description: 'Description',
-            createdAt: 'Created At',
-            updatedAt: 'Updated At',
-          },
+            id: 'ID',
+            name: 'Nombre',
+            description: 'Descripción',
+            active: 'Activo',
+            createdAt: 'Creado',
+            updatedAt: 'Actualizado',
+          }
         );
         this.tableHelper.setAllColumnNames(['edit', 'delete']);
         this.spinnerService.hide();
-      });
+      },
+      error: (error) => {
+        this.snackBarService.openFailureSnackBar({
+          message: 'Error al cargar las especialidades',
+        });
+        this.spinnerService.hide();
+      }
+    });
   }
 
   openEditSpecialtyDialog(specialty: Specialty) {
@@ -125,7 +115,7 @@ export class ManageSpecialtiesPageComponent implements OnInit, AfterViewInit {
     );
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getPagedSpecialties(this.requestParams);
+        this.loadSpecialties();
       }
     });
   }
@@ -139,19 +129,26 @@ export class ManageSpecialtiesPageComponent implements OnInit, AfterViewInit {
     );
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getPagedSpecialties(this.requestParams);
+        this.loadSpecialties();
       }
     });
   }
 
   deleteSpecialty(specialty: Specialty) {
     this.spinnerService.show();
-    this.specialtyService.deleteSpecialty(specialty.id).subscribe(() => {
-      this.snackBarService.openSuccessSnackBar({
-        message: `Specialty ${specialty.name} has been deleted`,
-      });
-      this.getPagedSpecialties(this.requestParams);
-      this.spinnerService.hide();
+    this.specialtyService.deleteSpecialty(specialty.id).subscribe({
+      next: () => {
+        this.snackBarService.openSuccessSnackBar({
+          message: `Especialidad ${specialty.name} eliminada con éxito`,
+        });
+        this.loadSpecialties();
+      },
+      error: (error) => {
+        this.snackBarService.openFailureSnackBar({
+          message: 'Error al eliminar la especialidad',
+        });
+        this.spinnerService.hide();
+      }
     });
   }
 }

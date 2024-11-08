@@ -42,14 +42,14 @@ export const Registration_Validation_Messages: ValidationMessage = {
     { type: 'email', message: 'Ingrese un correo electrónico válido' },
   ],
   pesel: [
-    { type: 'required', message: 'El PESEL es obligatorio' },
+    { type: 'required', message: 'El CI es obligatorio' },
     {
       type: 'minlength',
-      message: `El PESEL debe tener ${UserFormValidationConstants.PESEL_LENGTH} caracteres`,
+      message: `El CI debe tener ${UserFormValidationConstants.PESEL_LENGTH} caracteres`,
     },
     {
       type: 'maxlength',
-      message: `El PESEL debe tener ${UserFormValidationConstants.PESEL_LENGTH} caracteres`,
+      message: `El CI debe tener ${UserFormValidationConstants.PESEL_LENGTH} caracteres`,
     },
   ],
   password: [
