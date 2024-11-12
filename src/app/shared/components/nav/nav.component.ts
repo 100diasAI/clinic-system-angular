@@ -93,6 +93,12 @@ export class NavComponent {
       requireLogin: true,
       allowedRoles: [UserRole.ADMIN, ],
     },
+    {
+      listItemText: 'Gestionar Bitacora',
+      listItemPath: PathConstants.MANAGE_BITACORA_PATH,
+      requireLogin: true,
+      allowedRoles: [UserRole.ADMIN, ],
+    },
     /* { 
       listItemText: 'Gestión de Asegurados', 
       listItemPath: PathConstants.MANAGE_PATIENTS_PATH,

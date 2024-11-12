@@ -1,0 +1,21 @@
+<div>
+    <button (click)="registrarAccion()">Registrar acción</button>
+    <h2>Bitácora de acciones</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Acción</th>
+          <th>Fecha y Hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bitacora of bitacoras">
+          <td>{{ bitacora.username }}</td>
+          <td>{{ bitacora.action }}</td>
+          <td>{{ bitacora.timestamp }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
